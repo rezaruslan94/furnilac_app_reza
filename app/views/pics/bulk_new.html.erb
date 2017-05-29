@@ -11,7 +11,8 @@
             <%= pic_form_fields.text_field :pic_date, :class => "dp" %>
             <%= pic_form_fields.text_field :wh, :class => "wh", placeholder: "WH" %>
             <%= pic_form_fields.text_field :qty, placeholder: "QTY" %>
-            <%= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
+             <%= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
+            <%#= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
             <%= pic_form_fields.link_to_remove "DESTROY", :id => "open-contacts-dialog-btn", :class => "btn btn-danger btn-sm", :method => :get %>
         <% end %>
     <% end %>

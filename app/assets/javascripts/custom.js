@@ -37,7 +37,7 @@ $( document ).ready(function() {
       cache: true
     },
     escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-    minimumInputLength: 1,
+    minimumInputLength: 3,
     templateResult: function(part){
       if (part.loading)
       return
