@@ -5,20 +5,34 @@
     </div>
   </div>
   <br>
+
   <% @area.pics.each do |pic| %>
     <% if pic.new_record? %>
         <%= f.fields_for :pics, pic do |pic_form_fields| %>
+        <div class="row">
+          <div class="col-md-2">
             <%= pic_form_fields.text_field :pic_date, :class => "dp" %>
+          </div>
+          <div class="col-md-2">
             <%= pic_form_fields.text_field :wh, :class => "wh", placeholder: "WH" %>
+          </div>
+          <div class="col-md-2">
             <%= pic_form_fields.text_field :qty, placeholder: "QTY" %>
-             <%= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
+          </div>
+          <div class="col-md-2">
+            <%= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
             <%#= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
-            <%= pic_form_fields.link_to_remove "DESTROY", :id => "open-contacts-dialog-btn", :class => "btn btn-danger btn-sm", :method => :get %>
+          </div>
+          <div class="col-md-4">
+            <%= pic_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
+          </div>
+        </div>
         <% end %>
     <% end %>
   <% end %>
-  <div class="btn-group" role="group">
-    <%= f.link_to_add "ADD", :pics, :id => "open-contacts-dialog-btn", :class => "btn btn-primary btn-lg", :method => :get %>
-    <%= f.submit 'SAVE', :id => "open-contacts-dialog-btn", :class => "btn btn-success btn-lg", :method => :get %>
+
+  <div>
+    <%= f.link_to_add "ADD", :pics, :class => "btn btn-primary btn-lg", :method => :get %>
+    <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
   </div>
 <% end %>

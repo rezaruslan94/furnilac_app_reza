@@ -1,83 +1,21 @@
-<table id="example" class="display" width="100%" cellspacing="0">
-        <thead>
-            <tr>
-                <th></th>
-                <th>First name</th>
-                <th>Last name</th>
-                <th>Position</th>
-                <th>Office</th>
-                <th width="18%">Start date</th>
-                <th>Salary</th>
-            </tr>
-        </thead>
-    </table>
-
-<script type="text/javascript">
-var editor; // use a global for the submit and return data rendering in the examples
-
-$(document).ready(function() {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "../php/staff.php",
-        table: "#example",
-        fields: [ {
-                label: "First name:",
-                name: "first_name"
-            }, {
-                label: "Last name:",
-                name: "last_name"
-            }, {
-                label: "Position:",
-                name: "position"
-            }, {
-                label: "Office:",
-                name: "office"
-            }, {
-                label: "Extension:",
-                name: "extn"
-            }, {
-                label: "Start date:",
-                name: "start_date",
-                type: "datetime"
-            }, {
-                label: "Salary:",
-                name: "salary"
-            }
-        ]
-    } );
-
-    // Activate an inline edit on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.inline( this );
-    } );
-
-    $('#example').DataTable( {
-        dom: "Bfrtip",
-        ajax: "../php/staff.php",
-        order: [[ 1, 'asc' ]],
-        columns: [
-            {
-                data: null,
-                defaultContent: '',
-                className: 'select-checkbox',
-                orderable: false
-            },
-            { data: "first_name" },
-            { data: "last_name" },
-            { data: "position" },
-            { data: "office" },
-            { data: "start_date" },
-            { data: "salary", render: $.fn.dataTable.render.number( ',', '.', 0, '$' ) }
-        ],
-        select: {
-            style:    'os',
-            selector: 'td:first-child'
-        },
-        buttons: [
-            { extend: "create", editor: editor },
-            { extend: "edit",   editor: editor },
-            { extend: "remove", editor: editor }
-        ]
-    } );
-} );
-
-</script>
+<div class="container">
+  <div class="row">
+    <div class="col">
+      1 of 2
+    </div>
+    <div class="col">
+      1 of 2
+    </div>
+  </div>
+  <div class="row">
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      1 of 3
+    </div>
+    <div class="col">
+      1 of 3
+    </div>
+  </div>
+</div>

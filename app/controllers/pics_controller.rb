@@ -101,6 +101,6 @@ class PicsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def pic_params
       params.require(:area).permit(
-      pics_attributes: [:wh, :qty, :part_id, :area_id, :pic_date])
+      pics_attributes: [:wh, :qty, :part_id, :area_id, :pic_date, :_destroy])
     end
 end

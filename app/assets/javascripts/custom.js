@@ -7,7 +7,7 @@ $( document ).ready(function() {
 
 $( document ).ready(function() {
   $(".ComboPart").select2({
-    width: '250px',
+    width: '150px',
     placeholder: "Choose a part",
     allowClear: true,
     ajax: {
@@ -68,7 +68,7 @@ $(document).on('nested:fieldAdded', function(event){
   });
 
   $(".ComboPart").select2({
-    width: '250px',
+    width: '150px',
     placeholder: "Choose a part",
     allowClear: true,
     ajax: {
@@ -98,7 +98,7 @@ $(document).on('nested:fieldAdded', function(event){
       cache: true
     },
     escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-    minimumInputLength: 1,
+    minimumInputLength: 3,
     templateResult: function(part){
       if (part.loading)
       return
