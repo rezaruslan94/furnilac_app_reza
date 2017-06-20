@@ -4,6 +4,7 @@ class ReportsController < ApplicationController
 
     def productivity_person
       @data_report_person = Pic.data_report_person(params[:start_date], params[:end_date], params[:area_combo])
+      @data_report_person_wh = Pic.data_report_person_wh(params[:start_date], params[:end_date], params[:area_combo])
       @area = Area.find(params[:area_combo]) if params[:area_combo].present?
 
       logger.debug
@@ -33,7 +34,14 @@ class ReportsController < ApplicationController
   end
 
   def test
-    @testa = Pic.testa(params[:start_date], params[:end_date], params[:area_combo])
+    @data_report_person_wh = Pic.data_report_person_wh(params[:start_date], params[:end_date], params[:area_combo])
+    respond_to do |format|
+      format.html
+      format.pdf do
+        render  pdf: 'person',   # Excluding ".pdf" extension.
+                layout: 'pdf'
+      end
+    end
   end
 
   def report_params

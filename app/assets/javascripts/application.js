@@ -20,4 +20,7 @@
 //= require select2_locale_pt-BR
 //= require dataTables/jquery.dataTables
 //= require dataTables/bootstrap/3/jquery.dataTables.bootstrap
+//= require rails.validations
+//= require rails.validations.simple_form
+//= require rails.validations.nested_form
 //= require_tree .

@@ -71,6 +71,6 @@ class BuyersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def buyer_params
-      params.require(:buyer).permit(:name)
+      params.require(:buyer).permit(:name, :_destroy)
     end
 end

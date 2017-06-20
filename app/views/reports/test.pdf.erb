@@ -1,168 +1,38 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Contoh Penggunaan Atribut Colspan dan Rowspan Tag Tabel</title>
+<title>FURNILAC PRIMAGUNA, PT.</title>
 <link href="stylesheets/jquery-ui.css.erb" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3><center><b>TEST</b></center></h3>
-
-  <center>
-    <table border="1" width="600px">
-      <br>
-      <table width="600px">
-        <center>
-        <tr><left>
-          <%= form_tag('/test', method: :get) do %>
-          <%= text_field_tag 'start_date'%>
-          <%= text_field_tag 'end_date'%>
-          <%= submit_tag 'Show' %>
-          <% end %>
-        </left>
-        </tr>
-        <tr>
-          <td>Periode : <%#= @pics.sum(:wh) %></td>
-        </tr>
-        </center>
-      </table>
-      Periode: <input type="text" name="periode">
-      <br>
-      <br>
-    </table>
-    <br><br>
-    <table border="1" width="800px">
-  <thead>
+<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI PERSON </b></center></h3>
+<center>
+  <table width="600px">
     <tr>
-      <th>Bagian</th>
-      <th>Area</th>
-      <th>PIC</th>
-      <th>EH</th>
-      <th>WH</th>
-      <th>P</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @data_report_people.each do |division_id, division_data| %>
-      <!-- tampilkan data area -->
-      <% division_data[:areas].each do |area_id, area_data| %>
-        <tr>
-          <td colspan="2"><%= area_data[:name] %></td>
-          <td><%= area_data[:pic_name] %></td>
-          <td><%= area_data[:eh] %></td>
-          <td><%= area_data[:wh] %></td>
-          <td><%= area_data[:p] %></td>
-        </tr>
-      <% end %>
-      <!-- tampilkan data bagian -->
-      <tr>
-        <td colspan="2"><b><%= division_data[:name] %></td>
-        <td><b><%= division_data[:pic_name] %></td>
-        <td><b><%= division_data[:eh] %></td>
-        <td><b><%= division_data[:wh] %></td>
-        <td><b><%= division_data[:p] %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-###############################################
-
-
-
-    <br><br>
-    <table border="1"  width="800px">
-      <tr><b>
-        <td  width="120px"><b><center>Bagian</center></td>
-        <td width="80px"><center><b>Area</td>
-        <td><b><center>PIC</td>
-        <td><b><center>EH</td>
-        <td><b><center>WH</td>
-        <td><b><center>P</td>
-        </b>
-      </tr>
-      <tr>
-        <body>
-          <% @pics.each do |pic| %>
-          <tr>
-            <td><%= pic.area.division.name %></td>
-            <td><%= pic.area.name %></td>
-            <td><%= pic.area.employee.name %></td>
-            <td><%= %></td>
-          </tr>
+      <td><b>WH :
+        <% total_wh = 0 %>
+        <% @data_report_person_wh.each do |pic| %>
+          <% total_wh += pic.wh %>
           <% end %>
-        </body>
-      </tr>
-    </table>
+        <%=  total_wh %></b>
+      </td>
+    </tr>
+</table>
+<br>
+<!-- <p>Show With Range Date -->
+<br><br><br>
+<script type="text/javascript">
+  $( "#start" ).datepicker({
+    dateFormat: 'dd-mm-yy',
+    inline: true
+  });
+</script>
 
-    <br><br>
-
-
-
-<% @divisons = Division.all %>
-
-    <table border="1"  width="1000px">
-      <tr><b>
-        <td  width="80px"><b><center>Bagian</center></td>
-        <td width="80px"><center><b>Area</td>
-        <td><b><center>PIC</td>
-          <td>Part</td>
-        <td><b><center>EH</td>
-        <td><b><center>WH</td>
-        <td><b><center>P</td>
-        </b></tr>
-      <tr>
-      <tbody>
-      <% @divisons.each do |division| %>
-      <% division.areas.each do |area| %>
-      <% @sum_wh = 0.0 %>
-      <% area.pics.each do |pic| %>
-      <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-          <td><%= pic.part.name %></td>
-          <td><%= area.pics.sum(:qty) * pic.part.norms %></td>
-          <td><%= pic.wh %></td>
-          <td><%= ((area.pics.sum(:qty) * pic.part.norms)/area.pics.sum(:wh))*100 %>%</td>
-      </tr>
-      <% end %>
-      <tr>
-          <td></td>
-          <td><%= area.name %></td>
-          <td><%= area.employee.name %></td>
-          <td></td>
-          <td><%=@sum_wh %></td>
-          <td><%= area.pics.sum(:wh) %></td>
-          <td></td>
-      </tr>
-      <% end %>
-      <tr >
-          <td colspan="2"><b><%= division.name %></b></td>
-          <td><%= division.employee.name %></td>
-          <td></td>
-          <td></td>
-          <td></td>
-      </tr>
-      <% end %>
-      </tbody>
-      </tr>
-    </table>
-
-    <br><br>
-  </center>
+<script type="text/javascript">
+  $( "#end" ).datepicker({
+    dateFormat: 'dd-mm-yy',
+    inline: true
+  });
+</script>
 </body>
 </html>
-<script type="text/javascript">
-  $( "#start_date" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
-
-<script type="text/javascript">
-  $( "#end_date" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
--

@@ -8,19 +8,33 @@
   <% @buyer.terminal_fourths.each do |terminal_fourth| %>
     <% if terminal_fourth.new_record? %>
         <%= f.fields_for :terminal_fourths, terminal_fourth do |terminal_fourth_form_fields| %>
-            <%= terminal_fourth_form_fields.text_field :po, placeholder: "PO", :class => "po" %>
+          <div class="row">
+            <div class="col-md-2">
+              <%= terminal_fourth_form_fields.text_field :po, placeholder: "PO", :class => "po" %>
+            </div>
+            <div class="col-md-2">
             <%= terminal_fourth_form_fields.text_field :item_name, placeholder: "ITEM NAME" %>
             <%#= terminal_fourth_form_fields.collection_select :item_id, Item.all, :id, :name, { include_blank: true }, { :class => "ComboPart" } %>
+          </div>
+            <div class="col-md-2">
             <%= terminal_fourth_form_fields.text_field :qty, placeholder: "QTY" %>
+          </div>
+          <div class="col-md-2">
             <%= terminal_fourth_form_fields.text_field :terminal_inspect,placeholder: "INSPECT", :class => "dp" %>
+          </div>
+          <div class="col-md-2">
             <%= terminal_fourth_form_fields.text_field :terminal_stuffing,placeholder: "STUFFING", :class => "dp" %>
-            <%= terminal_fourth_form_fields.link_to_remove "DELETE", :id => "open-contacts-dialog-btn", :class => "btn btn-danger btn-sm", :method => :get %>
+          </div>
+          <div class="col-md-2">
+            <%= terminal_fourth_form_fields.link_to_remove "DELETE", :class => "btn btn-danger btn-sm", :method => :get %>
+            </div>
+          </div>
         <% end %>
     <% end %>
   <% end %>
-  <div class="btn-group" role="group">
-    <%= f.link_to_add "ADD", :terminal_fourths, :id => "open-contacts-dialog-btn", :class => "btn btn-primary btn-lg", :method => :get %>
-    <%= f.submit 'SAVE', :id => "open-contacts-dialog-btn", :class => "btn btn-success btn-lg", :method => :get %>
-  </div>
 
+  <div>
+    <%= f.link_to_add "ADD", :terminal_fourths, :class => "btn btn-primary btn-lg", :method => :get %>
+    <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
+  </div>
 <% end %>

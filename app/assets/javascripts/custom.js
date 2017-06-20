@@ -50,9 +50,10 @@ $( document ).ready(function() {
   });
 });
 
+$( document ).ready(function() {
 
-
-$(document).on('nested:fieldAdded', function(event){
+$('form').on('nested:fieldAdded', function(event) {
+  $(event.target).find(':input').enableClientSideValidations();
   var field = event.field;
   //Untuk Add data di form
   field.find('.wh').val($('#area_pics_attributes_0_wh').val());
@@ -109,7 +110,10 @@ $(document).on('nested:fieldAdded', function(event){
       return part.number || part.text;
     }
   });
+
 });
+});
+
 
 $(document).ready(function() {
   $('#PicDataTables').dataTable({

@@ -1,7 +1,7 @@
-<%= nested_form_for(@area, url: bulk_insert_area_pics_path, method: :POST) do |f| %>
+<%= nested_form_for(@area, validate: true, url: bulk_insert_area_pics_path, method: :POST) do |f| %>
   <div class="row">
     <div class="col-md-3">
-      Area : <%= f.text_field :name, disabled: true %>
+      Area : <%= f.text_field :name, validate: { presence: true, uniqueness: false }, disabled: true %>
     </div>
   </div>
   <br>
@@ -11,13 +11,13 @@
         <%= f.fields_for :pics, pic do |pic_form_fields| %>
         <div class="row">
           <div class="col-md-2">
-            <%= pic_form_fields.text_field :pic_date, :class => "dp" %>
+            <%= pic_form_fields.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp" %>
           </div>
           <div class="col-md-2">
-            <%= pic_form_fields.text_field :wh, :class => "wh", placeholder: "WH" %>
+            <%= pic_form_fields.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh", placeholder: "WH" %>
           </div>
           <div class="col-md-2">
-            <%= pic_form_fields.text_field :qty, placeholder: "QTY" %>
+            <%= pic_form_fields.text_field :qty, validate: { presence: true, uniqueness: false }, placeholder: "QTY" %>
           </div>
           <div class="col-md-2">
             <%= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>

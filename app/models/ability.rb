@@ -7,12 +7,12 @@ class Ability
       can :manage, :all
     elsif user.qc?
       # can [:create], [Employee]
-      can [:read], [Department, Division, Area, Item, Pic]
-      can [:create], [Department, Division, Area, Item, Pic]
-      can [:update], [Department, Division, Area, Item, Pic]
-      can [:destroy], [Department, Division, Area, Item, Pic]
-      can [:bulk_new], [Department, Division, Area, Item, Pic]
-      can [:bulk_insert], [Department, Division, Area, Item, Pic]
+      can [:read], [Department, Division, Area, Item, Pic, Employee]
+      can [:create], [Department, Division, Area, Item, Pic, Employee]
+      can [:update], [Department, Division, Area, Item, Pic, Employee]
+      can [:destroy], [Department, Division, Area, Item, Pic, Employee]
+      can [:bulk_new], [Department, Division, Area, Item, Pic, Employee]
+      can [:bulk_insert], [Department, Division, Area, Item, Pic, Employee]
       # can [:productivity_people], [Department, Division, Area, Item, Pic]
       # can [:productivity_person], [Department, Division, Area, Item, Pic]
       # can [:read], [Department]

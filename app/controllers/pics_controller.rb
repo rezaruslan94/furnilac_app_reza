@@ -68,7 +68,7 @@ class PicsController < ApplicationController
   # PATCH/PUT /pics/1.json
   def update
     respond_to do |format|
-      if @pic.update(pic_params)
+      if @pic.update(part_update_params)
         format.html { redirect_to @pic, notice: 'Pic was successfully updated.' }
         format.json { render :show, status: :ok, location: @pic }
       else
@@ -99,6 +99,10 @@ class PicsController < ApplicationController
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
+    def part_update_params
+      params.require(:pic).permit(:wh, :qty, :part_id, :area_id, :pic_date)
+    end
+
     def pic_params
       params.require(:area).permit(
       pics_attributes: [:wh, :qty, :part_id, :area_id, :pic_date, :_destroy])

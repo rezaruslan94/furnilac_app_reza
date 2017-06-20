@@ -116,7 +116,7 @@ class TerminalFourthsController < ApplicationController
 
     def insert_terminal_params
       params.require(:buyer).permit(
-      terminal_fourths_attributes: [:po, :qty, :finish, :terminal_inspect, :terminal_stuffing, :buyer_id, :item_name]
+      terminal_fourths_attributes: [:po, :qty, :finish, :terminal_inspect, :terminal_stuffing, :buyer_id, :item_name, :_destroy]
       )
     end
 
