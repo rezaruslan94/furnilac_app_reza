@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170524015728) do
+ActiveRecord::Schema.define(version: 20170704060548) do
 
   create_table "areas", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
@@ -63,13 +63,11 @@ ActiveRecord::Schema.define(version: 20170524015728) do
   end
 
   create_table "pics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.float    "wh",         limit: 24
     t.float    "qty",        limit: 24
     t.datetime "created_at",            null: false
     t.datetime "updated_at",            null: false
     t.integer  "part_id"
-    t.integer  "area_id"
-    t.date     "pic_date"
+    t.integer  "twh_id"
   end
 
   create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -93,6 +91,15 @@ ActiveRecord::Schema.define(version: 20170524015728) do
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.string   "item_name"
+  end
+
+  create_table "twhs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "area_id"
+    t.date     "pic_date"
+    t.integer  "wh"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["area_id", "pic_date"], name: "index_twhs_on_area_id_and_pic_date", unique: true, using: :btree
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

@@ -1,5 +1,14 @@
 Rails.application.routes.draw do
 
+  resources :twhs
+  resources :twh do
+    resources :pics do
+      collection do
+        get  :bulk_new
+        post :bulk_insert
+      end
+    end
+  end
   resources :roles
   resources :terminal_fourths do
     member do

@@ -1,21 +1,17 @@
 class Pic < ApplicationRecord
-  belongs_to :area, optional: true
   belongs_to :part
+  belongs_to :twh
   # validates :wh, :qty, :part_id, :area_id, presence: true
   # validates :qty, :wh, :numericality => {:greater_than => 0, :less_than => 9999999}
 
-  validates :wh, :qty, :part_id, :area_id, presence: true, length: { maximum: 30 }, if: :can_validate?
+  validates :qty, :part_id, presence: true, length: { maximum: 30 }, if: :can_validate?
 
   def can_validate?
     true
   end
 
   def self.data_report_person(start_date, end_date, area_combo)
-    Pic.select('part_id, sum(wh) as wh, count(wh) as cwh, sum(qty) as total_qty, area_id').where(pic_date: start_date..end_date).where(area_id: area_combo).group(:part_id)
-  end
-
-  def self.data_report_person_wh(start_date, end_date, area_combo)
-    Pic.select('avg(wh) as wh').where(pic_date: start_date..end_date).where(area_id: area_combo).group(:pic_date)
+    Pic.select('part_id, sum(qty) as total_qty, twh_id').where(pic_date: start_date..end_date).where(area_id: area_combo).group(:part_id)
   end
 
   def self.data_report_people(start_date, end_date)

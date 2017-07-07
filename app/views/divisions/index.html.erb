@@ -2,28 +2,18 @@
 
 <h1>Divisions</h1>
 
-<table class="table table-bordered">
+<table id="DivisionDataTables" data-source="<%= divisions_path(format: :json) %>" class="table table-bordered">
   <thead>
     <tr>
       <th>Department</th>
       <th>Division Name</th>
       <th>Employee</th>
-      <th colspan="3"></th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @divisions.each do |division| %>
-      <tr>
-        <td><%= division.department.try(:name) %></td>
-        <td><%= division.name %></td>
-        <td><%= division.employee.try(:name) %></td>
-        <td><%= link_to 'Show', division %></td>
-        <td><%= link_to 'Edit', edit_division_path(division) %></td>
-        <td><%= link_to 'Destroy', division, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    <%= will_paginate @articles %>
   </tbody>
 </table>
 

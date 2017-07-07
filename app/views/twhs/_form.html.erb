@@ -1,0 +1,42 @@
+<%= nested_form_for(@twh) do |f| %>
+  <div class="form-inputs">
+    <div class="row">
+      <div class="col-md-2">
+        <%= f.collection_select(:area_id, Area.all, :id, :name, include_blank: true) %>
+      </div>
+      <div class="col-md-2">
+        <%= f.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp" %>
+      </div>
+      <div class="col-md-2">
+        <%= f.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh", placeholder: "WH" %>
+    </div>
+  </div>
+  </div>
+
+        <%= f.fields_for :pics do |pic_form_fields| %>
+        <div class="row">
+          <div class="col-md-2">
+            <% if pic_form_fields.object.persisted? %>
+              <%= pic_form_fields.select(:part_id, [[pic_form_fields.object.part.number, pic_form_fields.object.part_id]], {}, { class: 'ComboPart' }) %>
+            <% else %>
+              <%= pic_form_fields.select(:part_id, [], {}, { class: 'ComboPart' }) %>
+            <% end %>
+            <%#= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
+            <%#= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
+          </div>
+          <div class="col-md-2">
+            <%= pic_form_fields.text_field :qty, placeholder: "QTY" %>
+          </div>
+          <div class="col-md-4">
+            <%= pic_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
+          </div>
+        </div>
+        <% end %>
+  <div>
+    <%= f.link_to_add "ADD", :pics, :class => "btn btn-primary btn-lg", :method => :get %>
+    <%#= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
+  </div>
+  <div class="form-actions">
+    <%= f.submit %>
+  </div>
+<% end %>

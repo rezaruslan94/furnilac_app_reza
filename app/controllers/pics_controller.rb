@@ -1,27 +1,27 @@
 class PicsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :set_area, only: [:bulk_new, :bulk_insert]
+  before_action :set_twh, only: [:bulk_new, :bulk_insert]
   before_action :set_pic, only: [:show, :edit, :update, :destroy]
 
   # GET /pics
   # GET /pics.json
 
   def bulk_new
-    @area = Area.find params[:area_id]
-        @area.pics.build(pic_date: Date.today)
-      logger.debug "isi area.pics: " + @area.pics.inspect
+    @twh = Twh.find params[:twh_id]
+        @twh.pics.build
+      # logger.debug "isi area.pics: " + @area.pics.inspect
   end
 
   ###############
     def bulk_insert
       respond_to do |format|
-        if @area.update(pic_params)
+        if @twh.update(pic_params)
           format.html { redirect_to pics_url, notice: 'Area was successfully save.' }
-          format.json { render :show, status: :ok, location: @area }
+          format.json { render :show, status: :ok, location: @twh }
         else
           format.html { render :bulk_new }
-          format.json { render json: @area.errors, status: :unprocessable_entity }
+          format.json { render json: @twh.errors, status: :unprocessable_entity }
         end
       end
     end
@@ -94,17 +94,17 @@ class PicsController < ApplicationController
       @pic = Pic.find(params[:id])
     end
 
-    def set_area
-      @area = Area.find(params[:area_id])
+    def set_twh
+      @twh = Twh.find(params[:twh_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def part_update_params
-      params.require(:pic).permit(:wh, :qty, :part_id, :area_id, :pic_date)
+      params.require(:pic).permit(:qty, :part_id, :twh_id)
     end
 
     def pic_params
-      params.require(:area).permit(
-      pics_attributes: [:wh, :qty, :part_id, :area_id, :pic_date, :_destroy])
+      params.require(:twh).permit(
+      pics_attributes: [:qty, :part_id, :twh_id, :_destroy])
     end
 end

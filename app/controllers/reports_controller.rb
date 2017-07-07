@@ -4,7 +4,6 @@ class ReportsController < ApplicationController
 
     def productivity_person
       @data_report_person = Pic.data_report_person(params[:start_date], params[:end_date], params[:area_combo])
-      @data_report_person_wh = Pic.data_report_person_wh(params[:start_date], params[:end_date], params[:area_combo])
       @area = Area.find(params[:area_combo]) if params[:area_combo].present?
 
       logger.debug

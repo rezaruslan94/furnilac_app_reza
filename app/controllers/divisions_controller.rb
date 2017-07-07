@@ -6,7 +6,10 @@ class DivisionsController < ApplicationController
   # GET /divisions
   # GET /divisions.json
   def index
-    @divisions = Division.all.order('created_at DESC').paginate(page:params[:page], per_page: 5)
+    respond_to do |format|
+      format.html
+      format.json { render json: DivisionDatatable.new(view_context) }
+    end
   end
 
   # GET /divisions/1

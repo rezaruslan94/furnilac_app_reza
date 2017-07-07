@@ -1,0 +1,23 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Twhs</h1>
+
+<table id="TwhDataTables" data-source="<%= twhs_path(format: :json) %>" class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Area</th>
+      <th>Pic date</th>
+      <th>Wh</th>
+      <th>Insert</th>
+      <th>Edit</th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Twh', new_twh_path %>
