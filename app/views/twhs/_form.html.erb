@@ -5,7 +5,7 @@
         <%= f.collection_select(:area_id, Area.all, :id, :name, include_blank: true) %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp" %>
+        <%= f.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp", placeholder: "Tanggal" %>
       </div>
       <div class="col-md-2">
         <%= f.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh", placeholder: "WH" %>

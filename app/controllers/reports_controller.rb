@@ -17,11 +17,6 @@ class ReportsController < ApplicationController
     end
 
   def productivity_people
-    @pics = Pic.select('part_id, sum(wh) as total_wh, area_id').where(pic_date: (params[:start])..(params[:end])).group(:area_id)
-    @parts = Part.where(id: @pics.collect(&:part_id))
-    @areas = Area.where(id: @pics.collect(&:area_id))
-    @employees = Employee.all
-    @division = Division.all
     @data_report_people = Pic.data_report_people(params[:start_date], params[:end_date])
     respond_to do |format|
       format.html

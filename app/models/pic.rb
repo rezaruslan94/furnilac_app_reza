@@ -16,14 +16,13 @@ class Pic < ApplicationRecord
 
   def self.data_report_people(start_date, end_date)
     division_hash = {}
-    wh_pic = Pic.select('avg(wh) as wh').where(pic_date: start_date..end_date).group(:pic_date)
-    Pic.where(pic_date: start_date..end_date).each do |pic|
-      area_id = pic.area_id
-      division_id = pic.area.division_id
+    Pic.joins(:twh).where(twhs: {pic_date: [start_date..end_date]}).each do |pic|
+      area_id = pic.twh.area_id
+      division_id = pic.twh.area.division_id
 
       # ingat ini data awal division KALAU belum ada, semua angka mestinya 0, dan nanti di tiap looping akan ditambah sesuai divisi
       if division_hash[division_id].blank? # data untuk division_id ini belum ada, bikin dulu
-        division = pic.area.division
+        division = pic.twh.area.division
         division_hash[division_id] = {
           name: division.name,
           pic_name: division.employee_name, # asumsi saya udah bikin delegate
@@ -36,7 +35,7 @@ class Pic < ApplicationRecord
 
       # ingat ini data awal area KALAU belum ada, semua angka mestinya 0, dan nanti di tiap looping akan ditambah sesuai divisi
       if division_hash[division_id][:areas][area_id].blank? # data untuk area_id ini belum ada, bikin dulu
-        area = pic.area
+        area = pic.twh.area
         division_hash[division_id][:areas][area_id] = {
           name: area.name,
           pic_name: area.employee_name, # asumsi saya udah bikin delegate
@@ -50,8 +49,8 @@ class Pic < ApplicationRecord
       # di sini kita baru simpan data beneran untuk tiap pic yang sedang di-loop
       # cache data biar mudah aksesnya
       pic_eh = pic.qty * pic.part.norms
-      pic_wh = pic.wh
-      pic_p  =  (pic.qty * pic.part.norms) / pic.wh * 100.0
+      pic_wh = pic.twh.wh
+      pic_p  =  (pic.qty * pic.part.norms) / pic.twh.wh * 100.0
       # simpan data ke pics sesuai division dan area
       division_hash[division_id][:areas][area_id][:pics][pic.id] = {
         name: pic.part.name,
