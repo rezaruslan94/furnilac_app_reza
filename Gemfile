@@ -94,7 +94,7 @@ gem 'simple_form'
 gem 'client_side_validations-simple_form'
 
 #Database view
-gem 'scenic', '~> 1.3'
+#gem 'scenic', '~> 1.3'
 
 # gem 'mongoid'
 # gem 'client_side_validations'

@@ -11,7 +11,7 @@ class Pic < ApplicationRecord
   end
 
   def self.data_report_person(start_date, end_date, area_combo)
-    Pic.select('part_id, sum(qty) as total_qty, twh_id').where(pic_date: start_date..end_date).where(area_id: area_combo).group(:part_id)
+    Pic.joins(:twh).select('sum(qty) as total_qty, part_id, twh_id, wh, area_id, pic_date').where(twhs: {pic_date: [start_date..end_date], area_id: [area_combo]}).group(:part_id)
   end
 
   def self.data_report_people(start_date, end_date)
