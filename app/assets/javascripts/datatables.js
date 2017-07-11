@@ -5,7 +5,7 @@ $(document).ready(function() {
     "ajax": $('#TwhDataTables').data('source'),
     "pagingType": "full_numbers",
     "columnDefs": [
-      { "orderable": false, "targets": [3,4] }
+      { "orderable": false, "targets": [3] }
     ]
   });
 });
