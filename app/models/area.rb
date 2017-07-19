@@ -13,4 +13,10 @@ class Area < ApplicationRecord
 
   delegate :name, to: :employee, prefix: true, allow_nil: true
   delegate :name, :to => :division, prefix: true, :allow_nil => true
+
+  validates :name, :division_id, :employee_id, presence: true, length: { maximum: 30 }, if: :can_validate?
+
+  def can_validate?
+    true
+  end
 end

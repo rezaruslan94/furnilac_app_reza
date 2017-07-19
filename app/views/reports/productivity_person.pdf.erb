@@ -19,11 +19,11 @@
         <% @data_report_person.each do |pic| %>
           <% total_eh += (pic.total_qty  * pic.part.norms) %>
         <% end %>
-        <%=  total_eh.to_s(:rounded) %></b>
+        <%=  total_eh.round(2) %></b>
       </td>
       <td><b>WH :
         <% total_wh = 0 %>
-        <% @data_report_person.each do |pic| %>
+        <% @data_report_person_wh.each do |pic| %>
           <% total_wh += pic.wh %>
           <% end %>
         <%=  total_wh %></b>
@@ -48,8 +48,8 @@
           <td><%= pic.part.number %></td>
           <td><%= pic.part.name %></td>
           <td><%= pic.total_qty.to_i %></td>
-          <td><%= pic.part.norms %></td>
-          <td><%= (pic.total_qty  * pic.part.norms).to_s(:rounded) %></td>
+          <td><%= pic.part.norms.round(2) %></td>
+          <td><%= (pic.total_qty  * pic.part.norms).round(2) %></td>
         </tr>
       <% end %>
       </tbody>

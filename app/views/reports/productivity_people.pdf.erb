@@ -27,18 +27,18 @@
         <tr>
           <td colspan="2"><%= area_data[:name] %></td>
           <td><%= area_data[:pic_name] %></td>
-          <td><%= area_data[:eh].to_s(:rounded) %></td>
+          <td><%= area_data[:eh].round(2) %></td>
           <td><%= area_data[:wh] %></td>
-          <td><%= area_data[:p].to_s(:rounded) %>%</td>
+          <td><%= area_data[:p].round(0) %>%</td>
         </tr>
       <% end %>
       <!-- tampilkan data bagian -->
       <tr>
         <td colspan="2"><b><%= division_data[:name] %></td>
         <td><b><%= division_data[:pic_name] %></td>
-        <td><b><%= division_data[:eh].to_s(:rounded) %></td>
+        <td><b><%= division_data[:eh].round(2) %></td>
         <td><b><%= division_data[:wh] %></td>
-        <td><b><%= division_data[:p].to_s(:rounded) %>%</td>
+        <td><b><%= division_data[:p].round(0) %>%</td>
       </tr>
     <% end %>
   </tbody>

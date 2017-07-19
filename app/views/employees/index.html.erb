@@ -2,27 +2,20 @@
 
 <h1>Employees</h1>
 
-<table class="table table-bordered">
+<table id="EmployeeDataTables" data-source="<%= employees_path(format: :json) %>" class="table table-bordered">
   <thead>
     <tr>
       <th>Name</th>
-      <th colspan="3"></th>
+      <th>Edit</th>
+      <th>Delete</th>
     </tr>
   </thead>
 
   <tbody>
-    <% @employees.each do |employee| %>
-      <tr>
-        <td><%= employee.name %></td>
-        <td><%= link_to 'Show', employee %></td>
-        <td><%= link_to 'Edit', edit_employee_path(employee) %></td>
-        <td><%= link_to 'Destroy', employee, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-    <%= will_paginate @employees %>
+
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Employee', new_employee_path %>
+<%= link_to 'NEW', new_employee_path, :class => "btn btn-primary btn-lg" %>

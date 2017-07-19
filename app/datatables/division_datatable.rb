@@ -20,8 +20,7 @@ class DivisionDatatable < AjaxDatatablesRails::Base
         '0' => record.department.name,
         '1' => record.name,
         '2' => record.employee.name,
-        '3' => link_to('Edit', edit_division_path(record)),
-        '4' => link_to('Destroy', record, method: :delete, data: {confirm: 'Are you sure?'})
+        '3' => link_to('Edit', edit_division_path(record))
       }
     end
   end

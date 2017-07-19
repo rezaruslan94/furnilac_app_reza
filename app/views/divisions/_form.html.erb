@@ -1,41 +1,31 @@
-<%= form_for(@division) do |f| %>
-  <% if division.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(division.errors.count, "error") %> prohibited this division from being saved:</h2>
+<%= nested_form_for(@division, validate: true) do |f| %>
 
-      <ul>
-      <% division.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
+  <div class="row">
+  <div class="col-md-2">
+    <%= f.collection_select(:department_id, Department.all, :id, :name, include_blank: true) %>
+  </div>
+    <div class="col-md-2">
+      <%= f.text_field :name, validate: { presence: true, uniqueness: false }, placeholder: "Division Name" %>
     </div>
-  <% end %>
-
-
-
-  <div class="row">
-  <div class="col-md-2"><%= f.label :department %></div>
-  <div class="col-md-2"><%= f.collection_select(:department_id, Department.all, :id, :name, include_blank: true) %></div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2"><%= f.label :name, "Division Name" %></div>
-    <div class="col-md-2"><%= f.text_field :name %></div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-2"><%= f.label :name, "Employee Name" %></div>
-    <div class="col-md-2"><%= f.collection_select(:employee_id, Employee.all, :id, :name, include_blank: true) %></div>
+    <div class="col-md-2">
+      <%= f.collection_select(:employee_id, Employee.all, :id, :name, {include_blank: true}, {class: 'ComboEmployee'}) %></div>
   </div>
   <br><br>
-  <%= f.fields_for :areas do |builder| %>
-    <%= render 'area_fields', f: builder, locals: {division: division} %>
-  <% end %>
-  <br>
-  <%= link_to_add_areas "Add Area", f, :areas %>
-
-  <div class="actions">
-    <div class="col-md-1"><%= f.submit %></div>
+  <%= f.fields_for :areas do |item_form_fields| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= item_form_fields.collection_select(:employee_id, Employee.all, :id, :name, include_blank: true) %>
+    </div>
+    <div class="col-md-2">
+      <%= item_form_fields.text_field :name, validate: { presence: true, uniqueness: false }, placeholder: "Area Name" %>
+    </div>
+    <div class="col-md-4">
+      <%= item_form_fields.link_to_remove "DELETE", :class => "btn btn-danger btn-sm"%>
+    </div>
   </div>
-  <br><br>
+    <% end %>
+    <div>
+      <%= f.link_to_add "ADD", :areas, :class => "btn btn-primary btn-lg", :method => :get %>
+      <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
+    </div>
 <% end %>

@@ -1,28 +1,26 @@
-<%= form_for(@item) do |f| %>
-  <% if item.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(item.errors.count, "error") %> prohibited this item from being saved:</h2>
-
-      <ul>
-      <% item.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-<br><br>
-  <div class="field">
-    <%= f.label :name %>
-    <%= f.text_field :name %>
+<%= nested_form_for(@item, validate: true) do |f| %>
+  <div class="form-input">
+    <%= f.text_field :name, validate: { presence: true, uniqueness: false }, placeholder: "ITEM" %>
   </div>
-  <br>
-
-  <%= f.fields_for :parts do |builder| %>
-    <%= render 'part_fields', f: builder, locals: {item: item} %>
+<br>
+  <%= f.fields_for :parts do |part_form_fields| %>
+  <div class="row">
+    <div class="col-md-2">
+      <%= part_form_fields.text_field :number, validate: { presence: true, uniqueness: false }, placeholder: "Number" %>
+    </div>
+    <div class="col-md-2">
+      <%= part_form_fields.text_field :name, validate: { presence: true, uniqueness: false }, placeholder: "Name" %>
+    </div>
+    <div class="col-md-2">
+      <%= part_form_fields.text_field :norms, validate: { presence: true, uniqueness: false }, placeholder: "Norms" %>
+    </div>
+    <div class="col-md-4">
+      <%= part_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
+    </div>
+  </div>
   <% end %>
-  <%= link_to_add_parts "Add Part", f, :parts %>
-
-  <div class="actions">
-    <%= f.submit %>
+  <div>
+    <%= f.link_to_add "ADD", :parts, :class => "btn btn-primary btn-lg", :method => :get %>
+    <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
   </div>
 <% end %>

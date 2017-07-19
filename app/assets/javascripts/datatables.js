@@ -11,11 +11,14 @@ $(document).ready(function() {
 });
 
 $(document).ready(function() {
-  $('#EmployeeDatatables').dataTable({
+  $('#EmployeeDataTables').dataTable({
     "processing": true,
     "serverSide": true,
-    "ajax": $('#EmployeeDatatables').data('source'),
-    "pagingType": "full_numbers"
+    "ajax": $('#EmployeeDataTables').data('source'),
+    "pagingType": "full_numbers",
+    "columnDefs": [
+      { "orderable": false, "targets": [1,2] }
+    ]
   });
 });
 
@@ -50,7 +53,19 @@ $(document).ready(function() {
     "ajax": $('#DivisionDataTables').data('source'),
     "pagingType": "full_numbers",
     "columnDefs": [
-      { "orderable": false, "targets": [3,4] }
+      { "orderable": false, "targets": [3] }
+    ]
+  });
+});
+
+$(document).ready(function() {
+  $('#ItemDataTables').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": $('#ItemDataTables').data('source'),
+    "pagingType": "full_numbers",
+    "columnDefs": [
+      { "orderable": false, "targets": [1] }
     ]
   });
 });

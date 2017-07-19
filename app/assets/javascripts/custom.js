@@ -37,7 +37,7 @@ $( document ).ready(function() {
       cache: true
     },
     escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
-    minimumInputLength: 3,
+    // minimumInputLength: 3,
     templateResult: function(part){
       if (part.loading)
       return
@@ -112,4 +112,12 @@ $('form').on('nested:fieldAdded', function(event) {
   });
 
 });
+});
+
+$( document ).ready(function() {
+  $(".ComboEmployee").select2({
+    width: '200px',
+    placeholder: "Division Employee",
+    allowClear: true
+  });
 });
