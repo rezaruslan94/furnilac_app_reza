@@ -106,6 +106,7 @@ class Pic < ApplicationRecord
       division_hash[division_id][:p] +=  division_eh / division_wh * 100.0
 
     end
+    pp "latest division_hash before returned to controller = #{division_hash.inspect}"
     division_hash
   end
 

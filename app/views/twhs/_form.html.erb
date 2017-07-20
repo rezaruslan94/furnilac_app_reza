@@ -19,11 +19,8 @@
           <div class="col-md-2">
             <% if pic_form_fields.object.persisted? %>
               <%= pic_form_fields.select(:part_id, [[pic_form_fields.object.part.number, pic_form_fields.object.part_id]], {}, { class: 'ComboPart' }) %>
-            <% elsif %>
-            <%= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
-              <% else %>
+            <% else %>
               <%= pic_form_fields.select(:part_id, [], {}, { class: 'ComboPart' }) %>
-
             <% end %>
             <%#= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
             <%#= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
