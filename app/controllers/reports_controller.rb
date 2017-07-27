@@ -29,7 +29,10 @@ class ReportsController < ApplicationController
   end
 
   def test
-    @data_report_person_wh = Pic.data_report_person_wh(params[:start_date], params[:end_date], params[:area_combo])
+    @data_report_test = Pic.data_report_test(params[:start_date], params[:end_date])
+    @data_report_test_wh = Pic.data_report_test_wh(params[:start_date], params[:end_date])
+
+    logger.debug
     respond_to do |format|
       format.html
       format.pdf do

@@ -17,6 +17,13 @@ class Pic < ApplicationRecord
     Twh.select('wh, area_id, pic_date').where(pic_date: start_date..end_date).where(area_id: area_combo).group(:id)
   end
 
+  def self.data_report_test(start_date, end_date)
+    Pic.joins(:twh).select('sum(qty) as total_qty, part_id, twh_id, area_id, pic_date').where(twhs: {pic_date: [start_date..end_date]}).group(:area_id)
+  end
+  def self.data_report_test_wh(start_date, end_date)
+    Twh.select('sum(wh) as total_wh, area_id, pic_date').where(pic_date: start_date..end_date).group(:area_id)
+  end
+
   def self.data_report_people(start_date, end_date)
     division_hash = {}
     Pic.joins(:twh).where(twhs: {pic_date: [start_date..end_date]}).each do |pic|
@@ -53,6 +60,8 @@ class Pic < ApplicationRecord
       # ingat ini data awal area KALAU belum ada, semua angka mestinya 0, dan nanti di tiap looping akan ditambah sesuai divisi
       if division_hash[division_id][:areas][area_id][:twhs][twh_id].blank? # data untuk area_id ini belum ada, bikin dulu
         twh = pic.twh
+        pp "Ini PIC #{twh.class}"
+        pp "Ini PIC.TWH #{pic.twh.class}"
         division_hash[division_id][:areas][area_id][:twhs][twh_id] = {
           wh: 0,
           pics: {}

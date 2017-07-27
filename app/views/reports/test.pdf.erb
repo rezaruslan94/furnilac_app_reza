@@ -5,21 +5,56 @@
 <link href="stylesheets/jquery-ui.css.erb" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI PERSON </b></center></h3>
+<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI PEOPLE </b></center></h3>
 <center>
   <table width="600px">
     <tr>
-      <td><b>WH :
-        <% total_wh = 0 %>
-        <% @data_report_person_wh.each do |pic| %>
-          <% total_wh += pic.wh %>
-          <% end %>
-        <%=  total_wh %></b>
-      </td>
+      <td><b>Periode : <%= params[:start_date] %> s/d <%= params[:end_date] %></b></td>
+    </tr>
+    <tr>
+
+
     </tr>
 </table>
 <br>
 <!-- <p>Show With Range Date -->
+<center><table border="1"  width="600px">
+        <th  width="80px"><b><center>Area</center></th>
+        <th width="200px"><center><b>PIC</th>
+        <th><b><center>EH</th>
+        <th><b><center>WH</th>
+        <th><b><center>P</th>
+        <th><b><center>QTY</th>
+    <tr>
+      <tbody>
+      <% @data_report_test.each do |pic| %>
+        <tr>
+          <td><%= pic.twh.area.name %></td>
+          <td><%= pic.twh.area.employee.name %></td>
+          <td><%= (pic.total_qty * pic.part.norms) %></td>
+          <td><%#= pic.twh.sum(:wh) %></td>
+          <td><%= ((pic.total_qty * pic.part.norms)/ pic.twh.wh)*100 %></td>
+          <td><%= pic.total_qty %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </tr>
+</table>
+<center><table border="1"  width="600px">
+    <tr><b>
+        <td><b><center>WH</td>
+    </b></tr>
+    <tr>
+      <tbody>
+      <% @data_report_test_wh.each do |pic| %>
+        <tr>
+          <td><%= pic.total_wh %></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </tr>
+
+</table>
 <br><br><br>
 <script type="text/javascript">
   $( "#start" ).datepicker({
