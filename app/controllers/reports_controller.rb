@@ -18,7 +18,8 @@ class ReportsController < ApplicationController
     end
 
   def productivity_people
-    @data_report_people = Pic.data_report_people(params[:start_date], params[:end_date])
+    @data_report_people_area = Pic.data_report_people_area(params[:start_date], params[:end_date])
+    @data_report_people_division = Pic.data_report_people_division(params[:start_date], params[:end_date])
     respond_to do |format|
       format.html
       format.pdf do
@@ -30,8 +31,7 @@ class ReportsController < ApplicationController
 
   def test
     @data_report_test = Pic.data_report_test(params[:start_date], params[:end_date])
-    @data_report_test_wh = Pic.data_report_test_wh(params[:start_date], params[:end_date])
-
+    puts "Data, #{@data_report_test}"
     logger.debug
     respond_to do |format|
       format.html

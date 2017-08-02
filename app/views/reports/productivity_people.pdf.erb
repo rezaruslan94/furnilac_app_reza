@@ -5,58 +5,75 @@
 <link href="stylesheets/jquery-ui.css.erb" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI </b></center></h3>
-<br><br>
-<p><b>Periode : <%= params[:start_date] %> s/d <%= params[:end_date] %></p></b>
-  <center>
-    <table border="1" width="800px">
-  <thead>
+<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI PEOPLE </b></center></h3>
+<center>
+  <table width="600px">
     <tr>
-      <th>Bagian</th>
-      <th>Area</th>
-      <th>PIC</th>
-      <th>EH</th>
-      <th>WH</th>
-      <th>P</th>
+      <td><b>Periode : <%= params[:start_date] %> s/d <%= params[:end_date] %></b></td>
     </tr>
-  </thead>
-  <tbody>
-    <% @data_report_people.each do |division_id, division_data| %>
-      <!-- tampilkan data area -->
-      <% division_data[:areas].each do |area_id, area_data| %>
+    <tr>
+
+
+    </tr>
+</table>
+<br>
+<!-- <p>Show With Range Date -->
+<center><table border="1"  width="600px">
+        <th  width="80px"><b><center>Area</center></th>
+        <th width="200px"><center><b>PIC</th>
+        <th><b><center>EH</th>
+        <th><b><center>WH</th>
+        <th><b><center>P</th>
+
+    <tr>
+      <tbody>
+      <% @data_report_people_area.each do |pic| %>
         <tr>
-          <td colspan="2"><%= area_data[:name] %></td>
-          <td><%= area_data[:pic_name] %></td>
-          <td><%= area_data[:eh].round(2) %></td>
-          <td><%= area_data[:wh] %></td>
-          <td><%= area_data[:p].round(0) %>%</td>
+          <td><%= pic.area %></td>
+          <td><%= pic.pic %></td>
+          <td><%= pic.eh.round(2) %></td>
+          <td><%= pic.wh %></td>
+          <td><%= pic.nilai_p.round(0) %>%</td>
         </tr>
       <% end %>
-      <!-- tampilkan data bagian -->
-      <tr>
-        <td colspan="2"><b><%= division_data[:name] %></td>
-        <td><b><%= division_data[:pic_name] %></td>
-        <td><b><%= division_data[:eh].round(2) %></td>
-        <td><b><%= division_data[:wh] %></td>
-        <td><b><%= division_data[:p].round(0) %>%</td>
-      </tr>
-    <% end %>
-  </tbody>
+      </tbody>
+    </tr>
 </table>
+<br><br><br>
+<center><table border="1"  width="600px">
+        <th  width="80px"><b><center>Division</center></th>
+        <th width="200px"><center><b>PIC</th>
+        <th><b><center>EH</th>
+        <th><b><center>WH</th>
+        <th><b><center>P</th>
 
-  </center>
+    <tr>
+      <tbody>
+      <% @data_report_people_division.each do |pic| %>
+        <tr>
+          <td><b><%= pic.division_name %></b></td>
+          <td><b><%= pic.pic %></b></td>
+          <td><b><%= pic.eh.round(2) %></b></td>
+          <td><b><%= pic.wh %></b></td>
+          <td><b><%= pic.nilai_p.round(0) %>%</b></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </tr>
+</table>
+<br><br><br>
+<script type="text/javascript">
+  $( "#start" ).datepicker({
+    dateFormat: 'dd-mm-yy',
+    inline: true
+  });
+</script>
+
+<script type="text/javascript">
+  $( "#end" ).datepicker({
+    dateFormat: 'dd-mm-yy',
+    inline: true
+  });
+</script>
 </body>
 </html>
-<script type="text/javascript">
-  $( "#start_date" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
-
-<script type="text/javascript">
-  $( "#end_date" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>

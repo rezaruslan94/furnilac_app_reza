@@ -24,36 +24,21 @@
         <th><b><center>EH</th>
         <th><b><center>WH</th>
         <th><b><center>P</th>
-        <th><b><center>QTY</th>
+
     <tr>
       <tbody>
       <% @data_report_test.each do |pic| %>
         <tr>
-          <td><%= pic.twh.area.name %></td>
-          <td><%= pic.twh.area.employee.name %></td>
-          <td><%= (pic.total_qty * pic.part.norms) %></td>
-          <td><%#= pic.twh.sum(:wh) %></td>
-          <td><%= ((pic.total_qty * pic.part.norms)/ pic.twh.wh)*100 %></td>
-          <td><%= pic.total_qty %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </tr>
-</table>
-<center><table border="1"  width="600px">
-    <tr><b>
-        <td><b><center>WH</td>
-    </b></tr>
-    <tr>
-      <tbody>
-      <% @data_report_test_wh.each do |pic| %>
-        <tr>
-          <td><%= pic.total_wh %></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </tr>
+          <td><%= pic.area %></td>
+          <td><%= pic.pic %></td>
+          <td><%= pic.eh.round(2) %></td>
+          <td><%= pic.wh %></td>
+          <td><%= pic.nilai_p.round(0) %>%</td>
 
+        </tr>
+      <% end %>
+      </tbody>
+    </tr>
 </table>
 <br><br><br>
 <script type="text/javascript">
