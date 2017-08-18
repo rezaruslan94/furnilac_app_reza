@@ -19,8 +19,8 @@
 <br>
 <!-- <p>Show With Range Date -->
 <center><table border="1"  width="600px">
-        <th  width="80px"><b><center>Area</center></th>
-        <th width="200px"><center><b>PIC</th>
+        <th  width="280px"><b><center>Area/PIC</center></th>
+        <!-- <th width="200px"><center><b>PIC</th> -->
         <th><b><center>EH</th>
         <th><b><center>WH</th>
         <th><b><center>P</th>
@@ -30,7 +30,7 @@
       <% @data_report_people_area.each do |pic| %>
         <tr>
           <td><%= pic.area %></td>
-          <td><%= pic.pic %></td>
+          <!-- <td><%#= pic.pic %></td> -->
           <td><%= pic.eh.round(2) %></td>
           <td><%= pic.wh %></td>
           <td><%= pic.nilai_p.round(0) %>%</td>
