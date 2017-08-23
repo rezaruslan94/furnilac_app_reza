@@ -19,6 +19,7 @@ class TwhsController < ApplicationController
   def new
     @twh = Twh.new
     @twh.pics.build
+    @ini_part = Part.all
   end
 
   # GET /twhs/1/edit

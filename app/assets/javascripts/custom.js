@@ -1,4 +1,11 @@
 $( document ).ready(function() {
+  $('.disable_enter').on('keypress', function(e) {
+      return e.which !== 13;
+  });
+});
+
+
+$( document ).ready(function() {
   $(".dp" ).datepicker({
     dateFormat: 'dd-mm-yy',
     inline: true
@@ -21,10 +28,6 @@ $( document ).ready(function() {
         };
       },
       processResults: function (data, params) {
-        // parse the results into the format expected by Select2
-        // since we are using custom formatting functions we do not need to
-        // alter the remote JSON data, except to indicate that infinite
-        // scrolling can be used
         params.page = params.page || 1;
 
         return {
@@ -40,9 +43,8 @@ $( document ).ready(function() {
     // minimumInputLength: 3,
     templateResult: function(part){
       if (part.loading)
-      return
-        part.text;
-      return part.number
+      return part.text;
+      return part.number;
     },
     templateSelection: function(part){
       return part.number || part.text;
@@ -55,12 +57,6 @@ $( document ).ready(function() {
 $('form').on('nested:fieldAdded', function(event) {
   $(event.target).find(':input').enableClientSideValidations();
   var field = event.field;
-  //Untuk Add data di form
-  field.find('.wh').val($('#area_pics_attributes_0_wh').val());
-  console.log("nilai wh di baris pertama = " + $('#area_pics_attributes_0_wh').val());
-
-  field.find('.dp').val($('#area_pics_attributes_0_pic_date').val());
-  field.find('.po').val($('#buyer_terminal_fourths_attributes_0_po').val());
 
   var dateField = field.find('.dp');
   dateField.datepicker({
@@ -68,7 +64,8 @@ $('form').on('nested:fieldAdded', function(event) {
     inline: true
   });
 
-  $(".ComboPart").select2({
+  var DataComboPart = field.find('.ComboPart');
+  DataComboPart.select2({
     width: '150px',
     placeholder: "Choose a part",
     allowClear: true,
@@ -83,10 +80,6 @@ $('form').on('nested:fieldAdded', function(event) {
         };
       },
       processResults: function (data, params) {
-        // parse the results into the format expected by Select2
-        // since we are using custom formatting functions we do not need to
-        // alter the remote JSON data, except to indicate that infinite
-        // scrolling can be used
         params.page = params.page || 1;
 
         return {
@@ -102,9 +95,8 @@ $('form').on('nested:fieldAdded', function(event) {
     minimumInputLength: 3,
     templateResult: function(part){
       if (part.loading)
-      return
-        part.text;
-      return part.number
+      return part.text;
+      return part.number;
     },
     templateSelection: function(part){
       return part.number || part.text;

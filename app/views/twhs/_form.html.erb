@@ -5,10 +5,10 @@
         <%= f.collection_select(:area_id, Area.all, :id, :name, include_blank: true) %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp", placeholder: "Tanggal" %>
+        <%= f.text_field :pic_date, validate: { presence: true, uniqueness: false }, :class => "dp disable_enter", placeholder: "Tanggal" %>
       </div>
       <div class="col-md-2">
-        <%= f.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh", placeholder: "WH" %>
+        <%= f.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh disable_enter", placeholder: "WH" %>
     </div>
   </div>
   </div>
@@ -22,11 +22,9 @@
             <% else %>
               <%= pic_form_fields.select(:part_id, [], {}, { class: 'ComboPart' }) %>
             <% end %>
-            <%#= pic_form_fields.select(:part_id, [], {}, { :class => 'ComboPart' }) %>
-            <%#= pic_form_fields.collection_select :part_id, Part.all, :id, :number, { include_blank: true }, { :class => "ComboPart" } %>
           </div>
           <div class="col-md-2">
-            <%= pic_form_fields.text_field :qty, validate: { presence: true, uniqueness: false }, placeholder: "QTY" %>
+            <%= pic_form_fields.text_field :qty, validate: { presence: true, uniqueness: false }, placeholder: "QTY", :class => "disable_enter" %>
           </div>
           <div class="col-md-4">
             <%= pic_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
