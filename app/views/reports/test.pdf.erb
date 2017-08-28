@@ -19,40 +19,52 @@
 <br>
 <!-- <p>Show With Range Date -->
 <center><table border="1"  width="600px">
-        <th  width="80px"><b><center>Area</center></th>
-        <th width="200px"><center><b>PIC</th>
+        <th  width="280px"><b><center>Area/PIC</center></th>
+        <!-- <th width="200px"><center><b>PIC</th> -->
         <th><b><center>EH</th>
         <th><b><center>WH</th>
         <th><b><center>P</th>
 
     <tr>
       <tbody>
-      <% @data_report_test.each do |pic| %>
+      <% @data_report_people_area_test.each do |pic| %>
         <tr>
           <td><%= pic.area %></td>
-          <td><%= pic.pic %></td>
+          <!-- <td><%#= pic.pic %></td> -->
           <td><%= pic.eh.round(2) %></td>
           <td><%= pic.wh %></td>
           <td><%= pic.nilai_p.round(0) %>%</td>
-
         </tr>
       <% end %>
       </tbody>
     </tr>
 </table>
 <br><br><br>
-<script type="text/javascript">
-  $( "#start" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
-
-<script type="text/javascript">
-  $( "#end" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+<script type="text/javascript">
+
+window.onload = function () {
+	var chart = new CanvasJS.Chart("chartContainer", {
+		theme: "theme2",//theme1
+		title:{
+			text: "Basic Column Chart - CanvasJS"
+		},
+		animationEnabled: false,   // change to true
+		data: [
+		{
+			// Change type to "bar", "area", "spline", "pie",etc.
+			type: "column",
+			dataPoints: [
+        <% Pics.each do |pic| %>
+				{ label: <%= pic.area %>,  y: <%= pic.nilai_p.round(0) %>  }
+        <% end %>
+			]
+		}
+		]
+	});
+	chart.render();
+}
+</script>

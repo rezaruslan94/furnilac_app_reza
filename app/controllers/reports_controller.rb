@@ -30,13 +30,11 @@ class ReportsController < ApplicationController
   end
 
   def test
-    @data_report_test = Pic.data_report_test(params[:start_date], params[:end_date])
-    puts "Data, #{@data_report_test}"
-    logger.debug
+    @data_report_people_area_test = Pic.data_report_people_area_test(params[:start_date], params[:end_date])
     respond_to do |format|
       format.html
       format.pdf do
-        render  pdf: 'person',   # Excluding ".pdf" extension.
+        render  pdf: 'people',   # Excluding ".pdf" extension.
                 layout: 'pdf'
       end
     end
