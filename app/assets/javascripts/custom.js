@@ -58,6 +58,11 @@ $('form').on('nested:fieldAdded', function(event) {
   $(event.target).find(':input').enableClientSideValidations();
   var field = event.field;
 
+  var DisableEnter = field.find('.disable_enter');
+  DisableEnter.on('keypress', function(e) {
+    return e.which !== 13;
+  });
+
   var dateField = field.find('.dp');
   dateField.datepicker({
     dateFormat: 'dd-mm-yy',
