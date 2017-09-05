@@ -14,7 +14,8 @@
         <center>
         <tr><left>
           <%#= form_tag('/report_people.pdf', method: :get) do %>
-          <%= form_tag(test_path(format: 'pdf'), method: :get) do %>
+          <%#= form_tag(test_path(format: 'pdf'), method: :get) do %>
+          <%= form_tag('/test', method: :get) do %>
           <%= text_field_tag 'start_date'%>
           <%= text_field_tag 'end_date'%>
           <%= submit_tag 'show', disabled: false %>
@@ -26,6 +27,27 @@
       <br>
     </table>
   </center>
+  <center><table border="1"  width="600px">
+          <th  width="280px"><b><center>Area/PIC</center></th>
+          <th><b><center>EH</th>
+          <th><b><center>WH</th>
+          <th><b><center>P</th>
+
+      <tr>
+        <tbody>
+        <% @data_report_people_area_test.each do |pic| %>
+          <tr>
+            <td><%= pic.area %></td>
+            <td><%= pic.eh.round(2) %></td>
+            <td><%= pic.wh %></td>
+            <td><%= pic.nilai_p.round(0) %>%</td>
+          </tr>
+        <% end %>
+        </tbody>
+      </tr>
+  </table>
+  <br><br><br>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>
 <script type="text/javascript">
@@ -41,3 +63,33 @@
     inline: true
   });
 </script>
+
+<script type="text/javascript">
+window.onload = function () {
+  var chart = new CanvasJS.Chart("chartContainer",{
+    title:{
+      text: "Pareto Chart of Fast Food Chains"
+    },
+    data: [
+    {
+    type: "column",
+      dataPoints: [
+        <% @data_report_people_area_test.each do |pic| %>
+            { label: "<%= pic.area %>",  y: <%= pic.nilai_p.round(0) %>  },
+          <% end %>
+      ]
+    }
+    ]
+  });
+
+  chart.render();
+  createPareto(chart);
+
+  function createPareto(chart){
+    var dps = [];
+
+    chart.addTo("data",{type:"line", yValueFormatString: "0'%'", dataPoints: dps});
+  }
+}
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>

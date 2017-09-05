@@ -14,9 +14,9 @@
       <left>
         <%#= form_tag('/report_person', method: :get) do %>
         <%= form_tag(report_person_path(format: 'pdf'), method: :get) do %>
-        <%= text_field_tag 'start_date'%> 
+        <%= text_field_tag 'start_date'%>
         <%= text_field_tag 'end_date'%>
-        <%= select_tag 'area_combo', options_for_select(Area.all.map{|e| [e.name, e.id]}) %>
+        <%= select_tag 'area_combo', options_for_select(@combo_area.all.map{|e| [e.name, e.id]}) %>
         <%= submit_tag 'Show' %>
         <% end %>
 </center>

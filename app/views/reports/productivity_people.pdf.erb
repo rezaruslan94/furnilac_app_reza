@@ -5,7 +5,7 @@
 <link href="stylesheets/jquery-ui.css.erb" rel="stylesheet" type="text/css">
 </head>
 <body>
-<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI PEOPLE </b></center></h3>
+<h3><center><b>LAPORAN PRODUKTIVITAS PRODUKSI </b></center></h3>
 <center>
   <table width="600px">
     <tr>
@@ -61,19 +61,36 @@
       </tbody>
     </tr>
 </table>
-<br><br><br>
-<script type="text/javascript">
-  $( "#start" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
-
-<script type="text/javascript">
-  $( "#end" ).datepicker({
-    dateFormat: 'dd-mm-yy',
-    inline: true
-  });
-</script>
+<div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>
+
+<script type="text/javascript">
+  window.onload = function () {
+    var chart = new CanvasJS.Chart("chartContainer",{
+      title:{
+        text: "Produktivitas Produksi"
+      },
+      data: [
+      {
+      type: "column",
+        dataPoints: [
+          <% @data_report_people_division.each do |pic| %>
+              { label: "<%= pic.division_name %>",  y: <%= pic.nilai_p.round(0) %>  },
+            <% end %>
+        ]
+      }
+      ]
+    });
+
+    chart.render();
+    createPareto(chart);
+
+    function createPareto(chart){
+      var dps = [];
+
+      chart.addTo("data",{type:"line", yValueFormatString: "0'%'", dataPoints: dps});
+    }
+  }
+</script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
