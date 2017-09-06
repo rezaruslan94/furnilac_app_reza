@@ -1,4 +1,5 @@
 <%= nested_form_for(@twh, validate: true) do |f| %>
+<table id="Test">
   <div class="form-inputs">
     <div class="row">
       <div class="col-md-2">
@@ -10,29 +11,37 @@
       <div class="col-md-2">
         <%= f.text_field :wh, validate: { presence: true, uniqueness: false }, :class => "wh disable_enter", placeholder: "WH" %>
     </div>
+    <div>
+      <%= f.link_to_add "ADD", :pics, "data-target" => "#pics", :class => "btn btn-primary btn-lg", :method => :get %>
+      <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
+    </div>
   </div>
   </div>
-  <br>
-
-        <%= f.fields_for :pics do |pic_form_fields| %>
-        <div class="row">
-          <div class="col-md-2">
-            <% if pic_form_fields.object.persisted? %>
+</table>
+  <br><p> </p>
+  <table id="pics">
+        <%= f.fields_for :pics, :wrapper => false do |pic_form_fields| %>
+          <tr class="fields">
+            <td>
+              <% if pic_form_fields.object.persisted? %>
               <%= pic_form_fields.select(:part_id, [[pic_form_fields.object.part.number, pic_form_fields.object.part_id]], {}, { class: 'ComboPart' }) %>
-            <% else %>
+              <% else %>
               <%= pic_form_fields.select(:part_id, [], {}, { class: 'ComboPart' }) %>
-            <% end %>
-          </div>
-          <div class="col-md-2">
-            <%= pic_form_fields.text_field :qty, validate: { presence: true, uniqueness: false }, placeholder: "QTY", :class => "disable_enter" %>
-          </div>
-          <div class="col-md-4">
-            <%= pic_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
-          </div>
-        </div>
+              <% end %>
+            </td>
+
+            <td>
+              <%= pic_form_fields.text_field :qty, validate: { presence: true, uniqueness: false }, placeholder: "QTY", :class => "disable_enter" %>
+            </td>
+
+            <td>
+              <%= pic_form_fields.link_to_remove "DESTROY", :class => "btn btn-danger btn-sm"%>
+            </td>
+
+            <td>
+            </td>
+          </tr>
         <% end %>
-        <div>
-          <%= f.link_to_add "ADD", :pics, :class => "btn btn-primary btn-lg", :method => :get %>
-          <%= f.submit 'SAVE', :class => "btn btn-success btn-lg", :method => :get %>
-        </div>
+  </table>
+
 <% end %>
