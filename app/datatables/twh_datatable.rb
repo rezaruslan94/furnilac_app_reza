@@ -21,7 +21,8 @@ class TwhDatatable < AjaxDatatablesRails::Base
         '0' => record.area.name,
         '1' => record.pic_date,
         '2' => record.wh,
-        '3' => link_to('Edit', edit_twh_path(record))
+        '3' => link_to('Edit', edit_twh_path(record)),
+        '4' => link_to('Delete', record, method: :delete, data: {confirm: 'Are you sure?'})
       }
     end
   end

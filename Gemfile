@@ -76,6 +76,7 @@ gem 'cancancan', '~> 1.10'
   # gem 'active_model_serializers', '~> 0.10.0'
   ####
   gem 'prawn-rails'
+  gem 'prawn-table'
   ##GEM PDF
 ###
 gem 'wicked_pdf'
@@ -99,3 +100,6 @@ gem 'client_side_validations-simple_form'
 # gem 'mongoid'
 # gem 'client_side_validations'
 # gem 'client_side_validations-mongoid'
+
+
+#chart

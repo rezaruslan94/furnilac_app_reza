@@ -19,6 +19,28 @@
 <br>
 <!-- <p>Show With Range Date -->
 <center><table border="1"  width="600px">
+        <th  width="200px"><b><center>Division</center></th>
+        <th width="200px"><center><b>PIC</th>
+        <th><b><center>EH</th>
+        <th><b><center>WH</th>
+        <th><b><center>P</th>
+
+    <tr>
+      <tbody>
+      <% @data_report_people_division.each do |pic| %>
+        <tr>
+          <td><b><%= pic.division_name %></b></td>
+          <td><b><%= pic.pic %></b></td>
+          <td><b><%= pic.eh.round(2) %></b></td>
+          <td><b><%= pic.wh %></b></td>
+          <td><b><%= pic.nilai_p.round(0) %>%</b></td>
+        </tr>
+      <% end %>
+      </tbody>
+    </tr>
+</table>
+<br>
+<center><table border="1"  width="600px">
         <th  width="280px"><b><center>Area/PIC</center></th>
         <!-- <th width="200px"><center><b>PIC</th> -->
         <th><b><center>EH</th>
@@ -40,27 +62,6 @@
     </tr>
 </table>
 <br><br><br>
-<center><table border="1"  width="600px">
-        <th  width="200px"><b><center>Division</center></th>
-        <th width="200px"><center><b>PIC</th>
-        <th><b><center>EH</th>
-        <th><b><center>WH</th>
-        <th><b><center>P</th>
-
-    <tr>
-      <tbody>
-      <% @data_report_people_division.each do |pic| %>
-        <tr>
-          <td><b><%= pic.division_name %></b></td>
-          <td><b><%= pic.pic %></b></td>
-          <td><b><%= pic.eh.round(2) %></b></td>
-          <td><b><%= pic.wh %></b></td>
-          <td><b><%= pic.nilai_p.round(0) %>%</b></td>
-        </tr>
-      <% end %>
-      </tbody>
-    </tr>
-</table>
 <div id="chartContainer" style="height: 300px; width: 100%;"></div>
 </body>
 </html>
@@ -68,15 +69,17 @@
 <script type="text/javascript">
   window.onload = function () {
     var chart = new CanvasJS.Chart("chartContainer",{
+      width:500,
       title:{
         text: "Produktivitas Produksi"
       },
       data: [
       {
       type: "column",
+      indexLabel: "{y}",
         dataPoints: [
-          <% @data_report_people_division.each do |pic| %>
-              { label: "<%= pic.division_name %>",  y: <%= pic.nilai_p.round(0) %>  },
+          <% @data_report_people_area.each do |pic| %>
+              { label: "<%= pic.area %>",  y: <%= pic.nilai_p.round(0) %>  },
             <% end %>
         ]
       }

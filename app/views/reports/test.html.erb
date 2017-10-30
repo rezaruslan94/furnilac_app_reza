@@ -14,8 +14,8 @@
         <center>
         <tr><left>
           <%#= form_tag('/report_people.pdf', method: :get) do %>
-          <%#= form_tag(test_path(format: 'pdf'), method: :get) do %>
-          <%= form_tag('/test', method: :get) do %>
+          <%= form_tag(test_path(format: 'pdf'), method: :get) do %>
+          <%#= form_tag('/test', method: :get) do %>
           <%= text_field_tag 'start_date'%>
           <%= text_field_tag 'end_date'%>
           <%= submit_tag 'show', disabled: false %>
