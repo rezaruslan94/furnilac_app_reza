@@ -7,11 +7,17 @@ class Part < ApplicationRecord
   #   all.where(::Arel::Nodes::SqlLiteral.new('name').matches("%#{sanitize_sql_like(query.to_s.strip.downcase)}%"))
   # end
 
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      Part.create! row.to_hash
+    end
+  end
+
   def self.select2(query)
     all.where(arel_table[:number].matches("%#{sanitize_sql_like(query.to_s.strip.downcase)}%"))
   end
 
-  validates :name, :number, :norms, presence: true, length: { maximum: 30 }, if: :can_validate?
+  validates :name, :number, :norms, presence: true, length: { maximum: 255 }, if: :can_validate?
 
   def can_validate?
     true

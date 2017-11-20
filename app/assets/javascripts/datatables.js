@@ -69,3 +69,12 @@ $(document).ready(function() {
     ]
   });
 });
+
+$(document).ready(function() {
+  $('#PartDataTables').dataTable({
+    "processing": true,
+    "serverSide": true,
+    "ajax": $('#PartDataTables').data('source'),
+    "pagingType": "full_numbers"
+  });
+});

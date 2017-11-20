@@ -12,8 +12,9 @@
   <% end %>
 
   <div class="field">
-    <%= f.label :item %>
-    <%= f.collection_select(:item_id, Item.all, :id, :name, include_blank: true) %>
+    <%#= f.label :item, "Part" %>
+    <%#= f.collection_select(:item_id, Item.all, :id, :id) %>
+    <%= f.select :item_id, Item.all.collect{|e|[e.id, e.id]}, {}, {style: "width:100px;", disabled: true} %>
   </div>
 
   <div class="field">

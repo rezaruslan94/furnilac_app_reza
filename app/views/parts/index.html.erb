@@ -1,34 +1,47 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Parts</h1>
+<h1 align="center"><b>PARTS</b></h1>
 
-<table class="table table-bordered">
+<h3>Import Parts</h3>
+<div class="row">
+  <%= form_tag import_parts_path, multipart: true do %>
+    <div class="col-md-2">
+      <%= file_field_tag :file %>
+    </div>
+    <div class="col-md-1">
+      <%= submit_tag "Upload Companies" %>
+    </div>
+  <% end %>
+</div>
+<br>
+<table id="PartDataTables" data-source="<%= parts_path(format: :json) %>" class="table table-bordered">
   <thead>
     <tr>
       <th>Number</th>
-      <th>Name</th>
+      <th>Edit</th>
+      <!-- <th>Name</th>
       <th>Norms</th>
-      <th>Item</th>
-      <th colspan="3"></th>
+      <th>Item</th> -->
+      <!-- <th colspan="3"></th> -->
     </tr>
   </thead>
 
   <tbody>
-    <% @parts.each do |part| %>
-      <tr>
-        <td><%= part.number %></td>
-        <td><%= part.name %></td>
-        <td><%= part.norms %></td>
-        <td><%= part.item.try(:name) %></td>
-        <td><%= link_to 'Show', part %></td>
-        <td><%= link_to 'Edit', edit_part_path(part) %></td>
-        <td><%= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <%# @parts.each do |part| %>
+      <!-- <tr>
+        <td><%#= part.number %></td>
+        <td><%#= part.name %></td>
+        <td><%#= part.norms %></td>
+        <td><%#= part.item.try(:name) %></td>
+        <td><%#= link_to 'Show', part %></td>
+        <td><%#= link_to 'Edit', edit_part_path(part) %></td>
+        <td><%#= link_to 'Destroy', part, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
-    <% end %>
-    <%= will_paginate @articles %>
+    <%# end %>
+    <%#= will_paginate @articles %> -->
   </tbody>
 </table>
 
 <br>
 
-<%= link_to 'New Part', new_part_path %>
+<%= link_to 'New Part', new_part_path, :class => "btn btn-primary btn-lg" %>

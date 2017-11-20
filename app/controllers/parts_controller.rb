@@ -1,6 +1,6 @@
 class PartsController < ApplicationController
   before_action :authenticate_user!
-  # load_and_authorize_resource
+  load_and_authorize_resource
   before_action :set_part, only: [:show, :edit, :update, :destroy]
 
   # GET /parts
@@ -10,7 +10,10 @@ class PartsController < ApplicationController
   end
 
   def index
-    @parts = Part.all.order('created_at DESC').paginate(page:params[:page], per_page: 5)
+    respond_to do |format|
+      format.html
+      format.json { render json: PartDatatable.new(view_context) }
+    end
   end
 
   # GET /parts/1
@@ -34,7 +37,7 @@ class PartsController < ApplicationController
 
     respond_to do |format|
       if @part.save
-        format.html { redirect_to @part, notice: 'Part was successfully created.' }
+        format.html { redirect_to parts_url, notice: 'Part was successfully created.' }
         format.json { render :show, status: :created, location: @part }
       else
         format.html { render :new }
@@ -48,7 +51,7 @@ class PartsController < ApplicationController
   def update
     respond_to do |format|
       if @part.update(part_params)
-        format.html { redirect_to @part, notice: 'Part was successfully updated.' }
+        format.html { redirect_to parts_url, notice: 'Part was successfully updated.' }
         format.json { render :show, status: :ok, location: @part }
       else
         format.html { render :edit }
@@ -65,6 +68,11 @@ class PartsController < ApplicationController
       format.html { redirect_to parts_url, notice: 'Part was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def import
+    Part.import(params[:file])
+    redirect_to parts_path, notice: "Parts Added successfully"
   end
 
   private
