@@ -5,7 +5,7 @@ $(document).ready(function() {
     "ajax": $('#TwhDataTables').data('source'),
     "pagingType": "full_numbers",
     "columnDefs": [
-      { "orderable": false, "targets": [3] }
+      { "orderable": false, "targets": [3,4] }
     ]
   });
 });
@@ -75,6 +75,9 @@ $(document).ready(function() {
     "processing": true,
     "serverSide": true,
     "ajax": $('#PartDataTables').data('source'),
-    "pagingType": "full_numbers"
+    "pagingType": "full_numbers",
+    "columnDefs": [
+      { "orderable": false, "targets": [1,2] }
+    ]
   });
 });

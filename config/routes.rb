@@ -43,6 +43,9 @@ Rails.application.routes.draw do
     end
   end
   resources :parts do
+    collection do
+      get   :select2
+    end
     collection { post :import }
   end
   resources :departments

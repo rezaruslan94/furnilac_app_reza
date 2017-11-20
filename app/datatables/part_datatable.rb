@@ -19,7 +19,8 @@ class PartDatatable < AjaxDatatablesRails::Base
     records.map do |record|
       {
         '0' => record.number,
-        '1' => link_to('Edit', edit_part_path(record))
+        '1' => link_to('Edit', edit_part_path(record)),
+        '2' => link_to('Delete', record, method: :delete, data: {confirm: 'Are you sure?'})
       }
     end
   end
